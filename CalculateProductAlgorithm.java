@@ -1,5 +1,10 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.math.BigInteger;
 import java.util.Scanner;
+
+import org.junit.Test;
 
 
 public class CalculateProductAlgorithm {
@@ -11,9 +16,8 @@ public class CalculateProductAlgorithm {
 	interface CalculateProduct {
 		BigInteger doCalculate(BigInteger n, BigInteger c);
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+	public static BigInteger calculateSumOfProduct(BigInteger N, BigInteger C) {
 		CalculateProduct firstToLast = (BigInteger first, BigInteger last) -> {
 			if(first.compareTo(last) > 0) return BigInteger.ZERO;
 			first = first.compareTo(BigInteger.ZERO) <= 0? BigInteger.ONE : first;
@@ -33,6 +37,20 @@ public class CalculateProductAlgorithm {
 			return result;
 			
 		};
+		return sum.doCalculate(N, C);
+	}
+	
+	@Test
+	public void runTests() {
+	      assertEquals(calculateSumOfProduct(new BigInteger("5"), new BigInteger("2")), new BigInteger("21"));
+	      assertEquals(calculateSumOfProduct(new BigInteger("100"), new BigInteger("10")), new BigInteger("513946235090696089113"));
+	      assertTrue(calculateSumOfProduct(new BigInteger("1000000"), new BigInteger("200")).toString().startsWith("4876116127"));
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
 
 		Scanner scanner = new Scanner(System.in);
 	    while (true) {
@@ -43,7 +61,7 @@ public class CalculateProductAlgorithm {
 	            break;
 	        }
 	        String[] array = input.split(",");
-	        System.out.println("result=" + sum.doCalculate(new BigInteger(array[0]), new BigInteger(array[1])));
+	        System.out.println("result=" + calculateSumOfProduct(new BigInteger(array[0]), new BigInteger(array[1])));
 	    }
 	}
 

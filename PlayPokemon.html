@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Pokemon Land</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<link rel="stylesheet" href="PlayPokemon.css">
+		<script src="PlayPokemon.js"></script>
+		<style type="text/css">
+			.background {
+			box-sizing: border-box;
+			width: 100%;
+			height: 80px;
+			padding: 3px;
+			background-image: url(images/hero-background.jpg);
+			border: 1px solid black;
+			background-size: 100% 100%;
+			}
+		</style>
+	</head>
+	<body>
+	<div class="container-fluid" ng-app="pokemonApp" ng-controller="pokemonController"">
+	
+		<nav class="navbar navbar-expand-sm navbar-dark background">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- Brand -->
+			<a class="navbar-brand left_top" href="#" >      Pokemon Gallery</a>
+
+			<!-- Links -->
+			<div class="collapse navbar-collapse right_top" id="nav-content">   
+				
+
+				<!-- Search -->
+				<form class="form-inline " role="search">
+					<input id="search" type="text" class="form-control"></input>
+					<button type="submit" class="btn btn-secondary" ng-click="performSearch()">Search</button>
+				</form>
+			</div>
+		
+		</nav>
+
+		<button ng-click="previousPage()" ng-disabled="prevDisabled">Previous</button><button ng-click="nextPage()" ng-disabled="nextDisabled">Next</button>
+		<div class="row" ng-repeat="n in [0, 4, 8, 12, 16]">
+			<div class="col-sm-12 col-md-6 col-lg-3" ng-hide="activePockmons.length < {{n + 1}}">
+				<div class="card" ng-if="mobileDevice"> 
+					<div class="card-header border-0 py-3 d-flex align-items-center">
+						<img src="images/{{ activePockmons[n].number }}.png" class="rounded-circle align-self-start mr-3">						
+						<div>
+							<h4 class="card-title mb-0">{{ activePockmons[n].name }}</h4>
+							<h6 class="card-subtitle text-muted">#{{ activePockmons[n].number }}</h6>
+						</div>
+
+					</div>
+				</div>
+				<div class="card card-header" ng-if="!mobileDevice">
+					<img class="rounded-circle mr-3" src="images/{{ activePockmons[n].number }}.png" alt="Card image cap" >				
+					<div class="card-block text-center">						
+						<h4 class="card-title mb-0 ">{{ activePockmons[n].name }}</h4>
+						<h6 class="card-subtitle text-muted">#{{ activePockmons[n].number }}</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3" ng-hide="activePockmons.length < {{n + 2}}">
+				<div class="card" ng-if="mobileDevice"> 
+					<div class="card-header border-0 py-3 d-flex align-items-center">
+						<img src="images/{{ activePockmons[n + 1].number }}.png" class="rounded-circle align-self-start mr-3">						
+						<div>
+							<h4 class="card-title mb-0">{{ activePockmons[n + 1].name }}</h4>
+							<h6 class="card-subtitle text-muted">#{{ activePockmons[n + 1].number }}</h6>
+						</div>
+
+					</div>
+				</div>
+				<div class="card card-header" ng-if="!mobileDevice">
+					<img class="rounded-circle mr-3" src="images/{{ activePockmons[n + 1].number }}.png" alt="Card image cap" >				
+					<div class="card-block text-center">						
+						<h4 class="card-title mb-0 ">{{ activePockmons[n + 1].name }}</h4>
+						<h6 class="card-subtitle text-muted">#{{ activePockmons[n + 1].number }}</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3" ng-hide="activePockmons.length < {{n + 3}}">
+				<div class="card" ng-if="mobileDevice"> 
+					<div class="card-header border-0 py-3 d-flex align-items-center">
+						<img src="images/{{ activePockmons[n + 2].number }}.png" class="rounded-circle align-self-start mr-3">						
+						<div>
+							<h4 class="card-title mb-0">{{ activePockmons[n + 2].name }}</h4>
+							<h6 class="card-subtitle text-muted">#{{ activePockmons[n + 2].number }}</h6>
+						</div>
+
+					</div>
+				</div>
+				<div class="card card-header" ng-if="!mobileDevice">
+					<img class="rounded-circle mr-3" src="images/{{ activePockmons[n + 2].number }}.png" alt="Card image cap" >				
+					<div class="card-block text-center">						
+						<h4 class="card-title mb-0 ">{{ activePockmons[n + 2].name }}</h4>
+						<h6 class="card-subtitle text-muted">#{{ activePockmons[n + 2].number }}</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3" ng-hide="activePockmons.length < {{n + 4}}">
+				<div class="card" ng-if="mobileDevice"> 
+					<div class="card-header border-0 py-3 d-flex align-items-center">
+						<img src="images/{{ activePockmons[n + 3].number }}.png" class="rounded-circle align-self-start mr-3">						
+						<div>
+							<h4 class="card-title mb-0">{{ activePockmons[n + 3].name }}</h4>
+							<h6 class="card-subtitle text-muted">#{{ activePockmons[n + 3].number }}</h6>
+						</div>
+
+					</div>
+				</div>
+				<div class="card card-header" ng-if="!mobileDevice">
+					<img class="rounded-circle mr-3" src="images/{{ activePockmons[n + 3].number }}.png" alt="Card image cap" >				
+					<div class="card-block text-center">						
+						<h4 class="card-title mb-0 ">{{ activePockmons[n + 3].name }}</h4>
+						<h6 class="card-subtitle text-muted">#{{ activePockmons[n + 3].number }}</h6>
+					</div>
+				</div>
+			</div>
+
+	    </div>
+		
+	</body>
+</html>

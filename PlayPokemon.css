@@ -1,0 +1,18 @@
+
+.right_top
+{
+    position:absolute;
+    right:0px;
+    top: 5px;
+}
+
+.left_top
+{
+    position:absolute;
+    left:10rem;
+    top: 5px;
+}
+
+#center {
+    vertical-align: middle;
+}
